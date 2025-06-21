@@ -1,0 +1,12 @@
+/* Custom CSS */
+
+
+.splide.products-list .splide__arrow--prev, .splide.products-list .splide__arrow--next {
+  width: 50px;
+  height: 50px;
+}
+.form-cart-wrap > a, .form-cart-wrap button {
+  font-size: 14px;
+  padding: 14px;
+}
+/* Responsive */
