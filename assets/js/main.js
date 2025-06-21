@@ -471,8 +471,9 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 });
 
+if ($('#banner-slider').length > 0) {
 
-new Splide('#banner-slider', {
+  new Splide('#banner-slider', {
   type: 'loop',
   autoplay: true,
   interval: 3000,
@@ -480,31 +481,31 @@ new Splide('#banner-slider', {
   arrows: false,
   pagination: true,
 }).mount();
+}
 
 
 
 // Update main image and zoom image if the selected variation has an image
-const mainImageElement = document.querySelector('.flexImg .main-image');
-const zoomImageElement = document.querySelector('.flexImg .zoom-image');
+function updateProductImages(variation) {
+  const mainImageElement = document.querySelector('.flexImg .main-image');
+  const zoomImageElement = document.querySelector('.flexImg .zoom-image');
 
-if (variation.image) {
-  this.data.variationImage = variation.image;
+  if (variation?.image) {
+    this.data.variationImage = variation.image;
 
-  // Select the main image element in the gallery and update its `src` attribute
-  if (mainImageElement && zoomImageElement) {
     const imageUrl = `${this.data?.siteSettings?.imageUploadFolder?.serverPath}/${this.data?.siteSettings?.imageUploadFolder?.products}/${this.data.product.gallery_folder}/${variation.image}`;
-    mainImageElement.src = imageUrl;
-    zoomImageElement.src = imageUrl; // Update zoom image as well
-    mainImageElement.style.display = 'block'; // Ensure the main image is visible
-    zoomImageElement.style.display = 'block'; // Ensure the zoom image is visible
-  }
-} else {
-  // Optional: Reset to the default main image if no image is available for the selected variation
-
-  const defaultImage = this.data.product.gallery[0];
-  if (mainImageElement && zoomImageElement) {
-    const defaultImageUrl = `${this.data?.siteSettings?.imageUploadFolder?.serverPath}/${this.data?.siteSettings?.imageUploadFolder?.products}/${this.data.product.gallery_folder}/${defaultImage}`;
-    mainImageElement.src = defaultImageUrl;
-    zoomImageElement.src = defaultImageUrl; // Update zoom image as well
+    if (mainImageElement && zoomImageElement) {
+      mainImageElement.src = imageUrl;
+      zoomImageElement.src = imageUrl;
+      mainImageElement.style.display = 'block';
+      zoomImageElement.style.display = 'block';
+    }
+  } else {
+    const defaultImage = this.data.product.gallery[0];
+    if (mainImageElement && zoomImageElement) {
+      const defaultImageUrl = `${this.data?.siteSettings?.imageUploadFolder?.serverPath}/${this.data?.siteSettings?.imageUploadFolder?.products}/${this.data.product.gallery_folder}/${defaultImage}`;
+      mainImageElement.src = defaultImageUrl;
+      zoomImageElement.src = defaultImageUrl;
+    }
   }
 }
