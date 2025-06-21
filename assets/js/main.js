@@ -436,4 +436,75 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 });
 
+document.addEventListener('DOMContentLoaded', function () {
+  var main = document.querySelector('#main-slider');
+  var thumbs = document.querySelector('#thumbnail-slider');
 
+  if (main && thumbs) {
+    var thumbnailSlider = new Splide(thumbs, {
+      fixedWidth: 100,
+      fixedHeight: 64,
+      isNavigation: true,
+      gap: 10,
+      focus: 'center',
+      pagination: false,
+      cover: true,
+      breakpoints: {
+        600: {
+          fixedWidth: 66,
+          fixedHeight: 44,
+        },
+      },
+    }).mount();
+
+    var mainSlider = new Splide(main, {
+      type: 'fade',
+      heightRatio: 0.9,
+      pagination: false,
+      arrows: false,
+      cover: true,
+    });
+
+    mainSlider.sync(thumbnailSlider).mount();
+  } else {
+    console.warn("Slider elements not found.");
+  }
+});
+
+
+new Splide('#banner-slider', {
+  type: 'loop',
+  autoplay: true,
+  interval: 3000,
+  pauseOnHover: false,
+  arrows: false,
+  pagination: true,
+}).mount();
+
+
+
+// Update main image and zoom image if the selected variation has an image
+const mainImageElement = document.querySelector('.flexImg .main-image');
+const zoomImageElement = document.querySelector('.flexImg .zoom-image');
+
+if (variation.image) {
+  this.data.variationImage = variation.image;
+
+  // Select the main image element in the gallery and update its `src` attribute
+  if (mainImageElement && zoomImageElement) {
+    const imageUrl = `${this.data?.siteSettings?.imageUploadFolder?.serverPath}/${this.data?.siteSettings?.imageUploadFolder?.products}/${this.data.product.gallery_folder}/${variation.image}`;
+    mainImageElement.src = imageUrl;
+    zoomImageElement.src = imageUrl; // Update zoom image as well
+    mainImageElement.style.display = 'block'; // Ensure the main image is visible
+    zoomImageElement.style.display = 'block'; // Ensure the zoom image is visible
+  }
+} else {
+  // Optional: Reset to the default main image if no image is available for the selected variation
+
+  const defaultImage = this.data.product.gallery[0];
+  if (mainImageElement && zoomImageElement) {
+    const defaultImageUrl = `${this.data?.siteSettings?.imageUploadFolder?.serverPath}/${this.data?.siteSettings?.imageUploadFolder?.products}/${this.data.product.gallery_folder}/${defaultImage}`;
+    mainImageElement.src = defaultImageUrl;
+    zoomImageElement.src = defaultImageUrl; // Update zoom image as well
+  }
+}
