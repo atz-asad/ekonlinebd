@@ -421,13 +421,15 @@ document.addEventListener('DOMContentLoaded', function () {
     new Splide(splideEl, {
       type: 'loop',
       perPage: 5,
+      interval: 3000,
+      autoplay: true,
       gap: '1rem',
       breakpoints: {
         768: {
-          perPage: 2,
+          perPage: 2.5,
         },
         480: {
-          perPage: 1,
+          perPage: 2,
         }
       }
     }).mount();
@@ -474,13 +476,13 @@ document.addEventListener('DOMContentLoaded', function () {
 if ($('#banner-slider').length > 0) {
 
   new Splide('#banner-slider', {
-  type: 'loop',
-  autoplay: true,
-  interval: 3000,
-  pauseOnHover: false,
-  arrows: false,
-  pagination: true,
-}).mount();
+    type: 'loop',
+    autoplay: true,
+    interval: 3000,
+    pauseOnHover: false,
+    arrows: false,
+    pagination: true,
+  }).mount();
 }
 
 
