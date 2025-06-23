@@ -421,15 +421,18 @@ document.addEventListener('DOMContentLoaded', function () {
     new Splide(splideEl, {
       type: 'loop',
       perPage: 5,
+      perMove: 1,
       interval: 3000,
       autoplay: true,
       gap: '1rem',
       breakpoints: {
         768: {
           perPage: 2.5,
+          perMove: 1,
         },
         480: {
           perPage: 2,
+          perMove: 1,
         }
       }
     }).mount();
@@ -511,3 +514,32 @@ function updateProductImages(variation) {
     }
   }
 }
+
+
+
+document.addEventListener('DOMContentLoaded', function () {
+  var splideEl = document.querySelector('#splide02');
+  if (splideEl) {
+    new Splide(splideEl, {
+      type: 'loop',
+      perPage: 4,
+      perMove: 1, // একবারে ১টা slide move করবে
+      pagination: false,
+      autoplay: true,
+      gap: '1rem',
+      breakpoints: {
+        768: {
+          perPage: 2.5,
+          perMove: 1,
+        },
+        480: {
+          perPage: 2,
+          perMove: 1,
+        }
+      }
+    }).mount();
+  } else {
+    console.warn('Splide element not found: .similar-products');
+  }
+});
+
